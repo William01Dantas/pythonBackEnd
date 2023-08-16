@@ -1,14 +1,13 @@
-# This is a sample Python script.
+from fastapi import FastAPI
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from app.controllers.routers.product_router import product_router
+from app.controllers.routers.user_router import user_router
 
+app = FastAPI()
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+app.include_router(user_router)
+app.include_router(product_router)
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="172.17.192.1", port=8000)
